@@ -118,3 +118,46 @@ def api_salesperson(request, id):
         )
     except Salesperson.DoesNotExist:
         return JsonResponse({"message": "Person does not exist"})
+
+
+@require_http_methods(["GET", "POST"])
+def api_customers(request):
+    """
+
+    """
+    if request.method == "GET":
+        customer = Customer.objects.all()
+        return JsonResponse(
+            {"customer": customer},
+            encoder=CustomerEncoder,
+            safe=False,
+        )
+    else: #POST
+        content = json.loads(request.body)
+        try:
+            customer = Customer.objects.create(**content)
+        except IntegrityError:
+            return JsonResponse({"message": "This phone number already exists"})
+
+        return JsonResponse(
+            customer,
+            encoder=CustomerEncoder,
+            safe=False
+        )
+
+
+@require_http_methods(["DELETE"])
+def api_customer(request, id):
+    """
+
+    """
+    try:
+        customer = Customer.objects.get(id=id)
+        customer.delete()
+        return JsonResponse(
+            customer,
+            encoder=CustomerEncoder,
+            safe=False,
+        )
+    except Customer.DoesNotExist:
+        return JsonResponse({"message": "Customer does not exist"})
