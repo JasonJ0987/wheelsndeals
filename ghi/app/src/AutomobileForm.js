@@ -5,7 +5,7 @@ function AutomobileForm() {
         color: '',
         year: '',
         vin: '',
-        model: '',
+        model_id: '',
     });
     const [models, setModels] = useState([]);
     const [isCreated, setIsCreated] = useState(false);
@@ -41,7 +41,7 @@ function AutomobileForm() {
                 color: '',
                 year: '',
                 vin: '',
-                model: '',
+                model_id: '',
             });
             setIsCreated(true);
         }
@@ -73,10 +73,10 @@ function AutomobileForm() {
                 <label htmlFor="vin">VIN...</label>
               </div>
               <div className="mb-3">
-                <select onChange={handleFormChange} value={formData.model} required name="model" className="form-select">
+                <select onChange={handleFormChange} value={formData.model_id} required name="model_id" className="form-select">
                   <option value="">Choose a model...</option>
                   {models.map(model => (
-                    <option key={model.id} value={model.name}>
+                    <option key={model.id} value={model.id}>
                         {model.name}
                     </option>
                   ))}

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 function ManufacturerForm() {
 
     const [name, setName] = useState('');
+    const [isCreated, setIsCreated] = useState(false);
 
     const handleNameChange = (event) => {
         const value = event.target.value;
@@ -26,7 +27,15 @@ function ManufacturerForm() {
         const response = await fetch(manufacturerUrl, fetchConfig);
         if (response.ok) {
             setName('');
+            setIsCreated(true);
         }
+    }
+
+    let formClasses = "";
+    let successClasses = "alert alert-success mb-0 d-none";
+    if (isCreated) {
+        formClasses = "d-none";
+        successClasses = "alert alert-success mb-0";
     }
 
     return (
@@ -34,7 +43,7 @@ function ManufacturerForm() {
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
                     <h1>Add a new manufacturer</h1>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} className={formClasses}>
                         <div className="form-floating mb-3">
                             <input value={name} onChange={handleNameChange} placeholder="Manufacturer Name..." required type="text" id="name" name="name" className="form-control" />
                             <label htmlFor="name">Manufacturer Name...</label>
@@ -43,6 +52,9 @@ function ManufacturerForm() {
                             Create
                         </button>
                     </form>
+                    <div className={successClasses}>
+                        Congratulations! You've created a new manufacturer!
+                    </div>
                 </div>
             </div>
         </div>

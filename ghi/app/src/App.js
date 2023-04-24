@@ -1,9 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
-import ListManufacturers from './ListManufacturers';
+import ManufacturerList from './ManufacturerList';
 import ManufacturerForm from './ManufacturerForm';
-import ListAutomobile from './ListAutomobile';
+import AutomobileList from './AutomobileList';
+import AutomobileForm from './AutomobileForm';
+import VehicleModelForm from './VehicleModelForm';
+import VehicleModelsList from './VehicleModelsList';
+
+
 
 function App() {
   return (
@@ -13,11 +18,16 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="manufacturers" >
-            <Route index element={<ListManufacturers />}/>
+            <Route index element={<ManufacturerList />}/>
             <Route path="new" element={<ManufacturerForm />}/>
           </Route>
+          <Route path="models" >
+            <Route index element={<VehicleModelsList />}/>
+            <Route path="new" element={<VehicleModelForm />}/>
+          </Route>
           <Route path="automobiles" >
-            <Route index element={<ListAutomobile />}/>
+            <Route index element={<AutomobileList />}/>
+            <Route path="new" element={<AutomobileForm />}/>
           </Route>
         </Routes>
       </div>

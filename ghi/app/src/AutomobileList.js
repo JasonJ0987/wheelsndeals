@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-function ListAutomobile() {
+function AutomobileList() {
 
     const [autos, setAutos] = useState([]);
 
@@ -56,4 +56,4 @@ function ListAutomobile() {
     )
 }
 
-export default ListAutomobile
+export default AutomobileList;

@@ -10,7 +10,7 @@ function VehicleModelsList() {
             setModels(data.models);
         }
     };
-    useEffect(() => {loadModels;},[]);
+    useEffect(() => {loadModels();},[]);
 
     return (
         <>
@@ -27,8 +27,8 @@ function VehicleModelsList() {
                 {models.map(model => (
                     <tr key = {model.id}>
                         <td>{ model.name }</td>
-                        <td>{ model.manufacturer }</td>
-                        <td>{ model.picture_url }</td>
+                        <td>{ model.manufacturer.name }</td>
+                        <td><img src={ model.picture_url } /></td>
                     </tr>
                 ))}
             </tbody>

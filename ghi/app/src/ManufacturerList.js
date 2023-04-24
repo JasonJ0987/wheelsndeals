@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-function ListManufacturers() {
+function ManufacturerList() {
 
     const [manus, setManus] = useState([]);
 
@@ -36,4 +36,4 @@ function ListManufacturers() {
     )
 }
 
-export default ListManufacturers
+export default ManufacturerList
