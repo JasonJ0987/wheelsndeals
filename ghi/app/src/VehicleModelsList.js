@@ -13,7 +13,7 @@ function VehicleModelsList() {
     useEffect(() => {loadModels();},[]);
 
     return (
-        <>
+        <div className='container'>
         <h1>Models</h1>
         <table className='table table-striped'>
             <thead>
@@ -33,7 +33,7 @@ function VehicleModelsList() {
                 ))}
             </tbody>
         </table>
-        </>
+        </div>
     )
 }
 export default VehicleModelsList

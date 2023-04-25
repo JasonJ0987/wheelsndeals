@@ -16,11 +16,18 @@ class AutomobileVO(models.Model):
         return self.vin
 
 class Appointment(models.Model):
+    @classmethod
+    def create(cls, **kwargs):
+        kwargs["status"] = "created"
+        appointment = cls(**kwargs)
+        appointment.save()
+        return appointment
+
     date_time = models.DateTimeField()
     reason = models.TextField()
     status = models.CharField(max_length=200)
     customer = models.CharField(max_length=200)
-    vin = models.CharField(max_length=200)
+    vin = models.CharField(max_length=17)
 
     technician = models.ForeignKey(
         "Technician",
@@ -37,10 +44,3 @@ class Appointment(models.Model):
     def finish_appointment(self):
         self.status = "finished"
         self.save()
-
-    @classmethod
-    def create(cls, **kwargs):
-        kwargs["status"] = "created"
-        appointment = cls(**kwargs)
-        appointment.save()
-        return appointment
