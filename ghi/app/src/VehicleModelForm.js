@@ -14,15 +14,15 @@ function VehicleModelForm() {
         if (response.ok) {
             const data = await response.json();
             setManufacturers(data.manufacturers);
-        }
-    }
+        };
+    };
     useEffect(() => {fetchManufacturers();}, []);
 
     const handleFormChange = (event) => {
         const value = event.target.value;
         const inputName = event.target.name;
         setFormData({...formData ,[inputName]: value});
-    }
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -43,8 +43,8 @@ function VehicleModelForm() {
                 manufacturer_id: '',
             });
             setIsCreated(true);
-        }
-    }
+        };
+    };
 
     let formClasses = "";
     let successClasses = "alert alert-success mb-0 d-none";
