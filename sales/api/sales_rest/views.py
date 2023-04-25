@@ -11,7 +11,7 @@ from django.db import IntegrityError
 
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
-    properties = ["vin"]
+    properties = ["vin", "sold"]
 
 
 class SalespersonEncoder(ModelEncoder):
@@ -45,7 +45,9 @@ class SaleEncoder(ModelEncoder):
         "price",
     ]
     encoders = {
-        "automobile": AutomobileVOEncoder
+        "automobile": AutomobileVOEncoder(),
+        "salesperson": SalespersonEncoder(),
+        "customer": CustomerEncoder(),
     }
 
 
@@ -87,7 +89,7 @@ def api_salespeople(request):
     if request.method == "GET":
         salesperson = Salesperson.objects.all()
         return JsonResponse(
-            {"salesperson": salesperson},
+            {"salespeople": salesperson},
             encoder=SalespersonEncoder,
         )
     else: # POST
@@ -109,7 +111,7 @@ def api_salesperson(request, id):
     Deletes a salesperson
     """
     try:
-        salesperson = Salesperson.objects.get(id=id)
+        salesperson = Salesperson.objects.get(employee_id=id)
         salesperson.delete()
         return JsonResponse(
             salesperson,
@@ -117,18 +119,51 @@ def api_salesperson(request, id):
             safe=False,
         )
     except Salesperson.DoesNotExist:
-        return JsonResponse({"message": "Person does not exist"})
+        return JsonResponse({"message": "Person does not exist"}, status=404)
 
 
 @require_http_methods(["GET", "POST"])
 def api_customers(request):
     """
+    RESTful API handler for customers
+
+    GET:
+    Returns list of customers
+    Expect a return list of customers
+    {
+        "customer": [
+                {
+                    "first_name": fn,
+                    "last_name": ln,
+                    "address": address,
+                    "phone_number": pn
+                }
+            ]
+    }
+
+    POST:
+    Creates new customer
+    Expect return of details of new customer
+    input:
+    {
+        "first_name": fn,
+        "last_name": ln,
+        "address": address,
+        "phone_number": pn
+    }
+    output:
+    {
+        "first_name": fn,
+        "last_name": ln,
+        "address": address,
+        "phone_number": pn
+    }
 
     """
     if request.method == "GET":
         customer = Customer.objects.all()
         return JsonResponse(
-            {"customer": customer},
+            {"customers": customer},
             encoder=CustomerEncoder,
             safe=False,
         )
@@ -149,7 +184,7 @@ def api_customers(request):
 @require_http_methods(["DELETE"])
 def api_customer(request, id):
     """
-
+    Deletes a customer
     """
     try:
         customer = Customer.objects.get(id=id)
@@ -160,4 +195,142 @@ def api_customer(request, id):
             safe=False,
         )
     except Customer.DoesNotExist:
-        return JsonResponse({"message": "Customer does not exist"})
+        return JsonResponse({"message": "Customer does not exist"}, status=404)
+
+
+@require_http_methods(["GET", "POST"])
+def api_sales(request, vin=None):
+    """
+    RESTful API handler for customers
+
+    GET:
+    Returns list of customers
+    Expect a return list of customers
+    {
+        "sales": [
+            {
+                "id": id,
+                "automobile": {
+                    "vin": vin,
+                    "sold": boolean
+                },
+                "salesperson": {
+                    "id": spid,
+                    "first_name": fn,
+                    "last_name": ln,
+                    "employee_id": eid
+                },
+                "customer": {
+                    "id": cid,
+                    "first_name": fn,
+                    "last_name": ln,
+                    "address": addy,
+                    "phone_number": #
+                },
+                "price": price
+            }
+        ]
+    }
+
+    POST:
+    Creates new customer
+    Expect return of details of new customer
+    input:
+    {
+        "automobile": vin,
+        "salesperson": eid,
+        "customer": cid,
+        "price": price
+    }
+    output:
+    {
+        "id": id,
+        "automobile": {
+            "vin": vin,
+            "sold": true
+        },
+        "salesperson": {
+            "id": spid,
+            "first_name": fn,
+            "last_name": ln,
+            "employee_id": eid
+        },
+        "customer": {
+            "id": cid,
+            "first_name": fn,
+            "last_name": ln,
+            "address": addy,
+            "phone_number": #
+        },
+        "price": price
+    }
+
+    Upon a creation of a sale, the sold value should become true
+    If the sale already exists, then it will not be made again
+    """
+    if request.method == "GET":
+        if vin == None:
+            sale = Sale.objects.all()
+        else:
+            sale = Sale.objects.get(vin=vin)
+        return JsonResponse(
+            {"sales": sale},
+            encoder=SaleEncoder,
+        )
+    else: #POST
+        content = json.loads(request.body)
+        try:
+            autoVO = AutomobileVO.objects.get(vin=content["automobile"])
+            salesperson = Salesperson.objects.get(employee_id=content["salesperson"])
+            customer = Customer.objects.get(id=content["customer"])
+            content["automobile"] = autoVO
+            content["salesperson"] = salesperson
+            content["customer"] = customer
+
+        except AutomobileVO.DoesNotExist:
+            return JsonResponse(
+                {"message": "VIN not found"},
+                status=404,
+            )
+        except Salesperson.DoesNotExist:
+            return JsonResponse(
+                {"message": "Employee not found"},
+                status=404,
+            )
+        except Customer.DoesNotExist:
+            return JsonResponse(
+                {"message": "Customer not found"},
+                status=404,
+            )
+
+        if autoVO.sold == True:
+            return JsonResponse(
+                {"message": "This sale has already been completed"},
+            )
+
+        autoVO.sold = True
+        autoVO.save()
+        sale = Sale.objects.create(**content)
+
+        return JsonResponse(
+            sale,
+            encoder=SaleEncoder,
+            safe=False,
+        )
+
+
+@require_http_methods(["DELETE"])
+def api_sale(request, id):
+    """
+
+    """
+    try:
+        sale = Sale.objects.get(id=id)
+        sale.delete()
+        return JsonResponse(
+            sale,
+            encoder=SaleEncoder,
+            safe=False,
+        )
+    except Sale.DoesNotExist:
+        return JsonResponse({"message": "Sale does not exist"}, status=404)
