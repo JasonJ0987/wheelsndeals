@@ -28,7 +28,7 @@ function SalespersonForm() {
         if (response.ok) {
             const data = await response.json();
             setAuto(data.autos);
-        };
+        }
     };
 
 
@@ -38,7 +38,7 @@ function SalespersonForm() {
         if (response.ok) {
             const data = await response.json();
             setSalespeople(data.salespeople);
-        };
+        }
     };
 
 
@@ -48,7 +48,7 @@ function SalespersonForm() {
         if (response.ok) {
             const data = await response.json();
             setCustomers(data.customers);
-        };
+        }
     };
 
 
@@ -105,7 +105,7 @@ function SalespersonForm() {
         } else {
             setIsError(true);
             throw new Error('Error');
-        };
+        }
     };
 
     let formClasses = "";
@@ -115,12 +115,13 @@ function SalespersonForm() {
     if (isError) {
         formClasses = "d-none";
         errorClasses = "alert alert-danger mb-0";
-    };
+    }
 
     if (isCreated) {
         formClasses = "d-none";
         successClasses = "alert alert-success mb-0";
-    };
+    }
+
     return(
         <div className="row">
         <div className="offset-3 col-6">
@@ -171,12 +172,12 @@ function SalespersonForm() {
                 Congratulations on your sale!
             </div>
             <div className={errorClasses}>
-                Something went wrong. Please confirm your VIN, Salesperson, and/or Customer information.
+                Something went wrong. Please confirm your VIN.
             </div>
           </div>
         </div>
       </div>
-    )
-}
+    );
+};
 
 export default SalespersonForm;

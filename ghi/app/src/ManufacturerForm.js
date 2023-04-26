@@ -8,7 +8,7 @@ function ManufacturerForm() {
     const handleNameChange = (event) => {
         const value = event.target.value;
         setName(value);
-    }
+    };
 
     const handleSubmit = async(event) => {
         event.preventDefault();
@@ -29,7 +29,7 @@ function ManufacturerForm() {
             setName('');
             setIsCreated(true);
         }
-    }
+    };
 
     let formClasses = "";
     let successClasses = "alert alert-success mb-0 d-none";
@@ -42,7 +42,7 @@ function ManufacturerForm() {
         <div className="row">
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
-                    <h1>Add a new manufacturer</h1>
+                    <h1>Create a manufacturer</h1>
                     <form onSubmit={handleSubmit} className={formClasses}>
                         <div className="form-floating mb-3">
                             <input value={name} onChange={handleNameChange} placeholder="Manufacturer Name..." required type="text" id="name" name="name" className="form-control" />
@@ -58,7 +58,7 @@ function ManufacturerForm() {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ManufacturerForm
+export default ManufacturerForm;

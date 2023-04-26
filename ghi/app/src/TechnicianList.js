@@ -28,7 +28,7 @@ function TechnicianList() {
     };
 
     const handleCancelDelete = () => { setDel(null) };
-    const handleDelete = (hatID) => { setDel(hatID) };
+    const handleDelete = (technicianID) => { setDel(technicianID) };
 
     return (
         <div className='container'>
@@ -62,6 +62,6 @@ function TechnicianList() {
             </tbody>
         </table>
         </div>
-    )
-}
-export default TechnicianList
+    );
+};
+export default TechnicianList;

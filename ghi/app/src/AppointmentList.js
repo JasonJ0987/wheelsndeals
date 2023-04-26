@@ -34,7 +34,7 @@ function AppointmentList() {
             setAppointments(appointments.filter(
                 appointment => appointment.id !== appointmentId));
         }
-    }
+    };
 
     const handleFinish = async (event, appointmentId) => {
         event.preventDefault();
@@ -47,7 +47,7 @@ function AppointmentList() {
             setAppointments(appointments.filter(
                 appointment => appointment.id !== appointmentId));
         }
-    }
+    };
 
     return (
         <div className='container'>
@@ -85,6 +85,6 @@ function AppointmentList() {
             </tbody>
         </table>
         </div>
-    )
-}
-export default AppointmentList
+    );
+};
+export default AppointmentList;

@@ -9,14 +9,15 @@ function SalesForm() {
         if (response.ok) {
             const data = await response.json();
             setSales(data.sales);
-        };
+        }
     };
+
     useEffect(() => {
         loadSales();
     }, []);
 
     return(
-        <div>
+        <div className="container">
             <h1>Sales</h1>
             <table className="table table-striped">
                 <thead>
@@ -44,7 +45,7 @@ function SalesForm() {
                                 {sale.automobile.vin}
                             </td>
                             <td>
-                                {sale.price}
+                                ${sale.price}
                             </td>
                         </tr>
                     ))}
@@ -54,4 +55,4 @@ function SalesForm() {
     );
 };
 
-export default SalesForm
+export default SalesForm;

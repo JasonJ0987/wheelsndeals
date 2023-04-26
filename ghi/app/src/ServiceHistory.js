@@ -28,16 +28,16 @@ function ServiceHistory() {
     const handleVinChange = (event) => {
         const value = event.target.value;
         setVin(value);
-    }
+    };
 
     const handleSearch = (event) => {
         event.preventDefault();
         setAppointmentsByVin(appointments.filter(appointment => appointment.vin===vin));
         setIsSearch(true);
-    }
+    };
 
     let wholeClasses = "";
-    let filteredClasses = "d-none"
+    let filteredClasses = "d-none";
     if (isSearch) {
         wholeClasses = "d-none";
         filteredClasses = "";
@@ -100,6 +100,6 @@ function ServiceHistory() {
             </tbody>
         </table>
         </div>
-    )
-}
-export default ServiceHistory
+    );
+};
+export default ServiceHistory;

@@ -9,7 +9,7 @@ function Nav() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0 row row-cols-6">
             <li className="nav-item">
               <NavLink className="nav-link" aria-current="page" to="/manufacturers">Manufacturers</NavLink>
             </li>
@@ -32,7 +32,7 @@ function Nav() {
               <NavLink className="nav-link" aria-current="page" to="/technicians">Technicians</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/technicians/new">Add a technician</NavLink>
+              <NavLink className="nav-link" aria-current="page" to="/technicians/new">Add a Technician</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" aria-current="page" to="/appointments">Service Appointments</NavLink>
@@ -62,7 +62,7 @@ function Nav() {
               <NavLink className="nav-link" aria-current="page" to="sales">Sales</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="sales/new">Record a sale</NavLink>
+              <NavLink className="nav-link" aria-current="page" to="sales/new">Record a Sale</NavLink>
             </li>
           </ul>
         </div>

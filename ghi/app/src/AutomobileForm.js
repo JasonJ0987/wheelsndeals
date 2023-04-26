@@ -9,6 +9,7 @@ function AutomobileForm() {
     });
     const [models, setModels] = useState([]);
     const [isCreated, setIsCreated] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     const fetchModels = async () => {
         const response = await fetch("http://localhost:8100/api/models/");
@@ -16,14 +17,14 @@ function AutomobileForm() {
             const data = await response.json();
             setModels(data.models);
         }
-    }
+    };
     useEffect(() => {fetchModels();}, []);
 
     const handleFormChange = (event) => {
         const value = event.target.value;
         const inputName = event.target.name;
         setFormData({...formData ,[inputName]: value});
-    }
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -44,11 +45,20 @@ function AutomobileForm() {
                 model_id: '',
             });
             setIsCreated(true);
+        } else {
+            setIsError(true);
+            throw new Error('Error');
         }
-    }
+    };
 
     let formClasses = "";
     let successClasses = "alert alert-success mb-0 d-none";
+    let errorClasses = "alert alert-danger mb-0 d-none";
+
+    if (isError) {
+        formClasses = "d-none";
+        errorClasses = "alert alert-danger mb-0";
+    }
     if (isCreated) {
         formClasses = "d-none";
         successClasses = "alert alert-success mb-0";
@@ -87,9 +97,12 @@ function AutomobileForm() {
             <div className={successClasses}>
                 Congratulations! You've added a new automobile!
             </div>
+            <div className={errorClasses}>
+                Something went wrong. Please confirm your VIN.
+            </div>
           </div>
         </div>
       </div>
     );
-}
-export default AutomobileForm
+};
+export default AutomobileForm;

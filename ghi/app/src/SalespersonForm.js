@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 
 function SalespersonForm() {
@@ -8,6 +8,7 @@ function SalespersonForm() {
         employee_id: '',
     });
     const [isCreated, setIsCreated] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     const handleFormChange = (event) => {
         const value = event.target.value;
@@ -32,15 +33,26 @@ function SalespersonForm() {
                 employee_id: '',
             });
             setIsCreated(true);
-        };
+        } else {
+            setIsError(true);
+            throw new Error('Error');
+        }
     };
 
     let formClasses = "";
     let successClasses = "alert alert-success mb-0 d-none";
+    let errorClasses = "alert alert-danger mb-0 d-none";
+
+    if (isError) {
+        formClasses = "d-none";
+        errorClasses = "alert alert-danger mb-0";
+    }
     if (isCreated) {
         formClasses = "d-none";
         successClasses = "alert alert-success mb-0";
-    };
+    }
+
+
     return(
         <div className="row">
         <div className="offset-3 col-6">
@@ -64,10 +76,13 @@ function SalespersonForm() {
             <div className={successClasses}>
                 Congratulations! Welcome to the CarCar Team!
             </div>
+            <div className={errorClasses}>
+                Something went wrong. Please confirm your employee ID.
+            </div>
           </div>
         </div>
       </div>
-    )
-}
+    );
+};
 
 export default SalespersonForm;

@@ -4,51 +4,9 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
 
-from common.json import ModelEncoder
 from .models import Salesperson, Customer, Sale, AutomobileVO
+from .encoders import SalespersonEncoder, CustomerEncoder, SaleEncoder
 from django.db import IntegrityError
-
-
-class AutomobileVOEncoder(ModelEncoder):
-    model = AutomobileVO
-    properties = ["vin", "sold"]
-
-
-class SalespersonEncoder(ModelEncoder):
-    model = Salesperson
-    properties = [
-        "id",
-        "first_name",
-        "last_name",
-        "employee_id",
-    ]
-
-
-class CustomerEncoder(ModelEncoder):
-    model = Customer
-    properties = [
-        "id",
-        "first_name",
-        "last_name",
-        "address",
-        "phone_number",
-    ]
-
-
-class SaleEncoder(ModelEncoder):
-    model = Sale
-    properties = [
-        "id",
-        "automobile",
-        "salesperson",
-        "customer",
-        "price",
-    ]
-    encoders = {
-        "automobile": AutomobileVOEncoder(),
-        "salesperson": SalespersonEncoder(),
-        "customer": CustomerEncoder(),
-    }
 
 
 @require_http_methods(["GET", "POST"])
@@ -97,7 +55,7 @@ def api_salespeople(request):
         try:
             salesperson = Salesperson.objects.create(**content)
         except IntegrityError:
-            return JsonResponse({"message": "This employee id already exists"})
+            return JsonResponse({"message": "This employee id already exists"}, status=400)
 
         return JsonResponse(
             salesperson,
@@ -172,7 +130,7 @@ def api_customers(request):
         try:
             customer = Customer.objects.create(**content)
         except IntegrityError:
-            return JsonResponse({"message": "This phone number already exists"})
+            return JsonResponse({"message": "This phone number already exists"}, status=400)
 
         return JsonResponse(
             customer,

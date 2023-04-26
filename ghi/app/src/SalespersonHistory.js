@@ -8,7 +8,7 @@ function SalespersonHistory() {
     const handleSelectChange = (event) => {
         const value = event.target.value;
         setSale(value);
-    }
+    };
 
     const loadEmployees = async () => {
         const url = "http://localhost:8090/api/salespeople/";
@@ -16,7 +16,7 @@ function SalespersonHistory() {
         if (response.ok) {
             const data = await response.json();
             setSalespeople(data.salespeople);
-        };
+        }
     };
     const loadSales = async () => {
         const url = "http://localhost:8090/api/sales/";
@@ -25,7 +25,7 @@ function SalespersonHistory() {
             const data = await response.json();
             setSales(data.sales);
         }
-    }
+    };
 
     useEffect(() => {
         loadEmployees();

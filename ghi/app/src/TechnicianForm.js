@@ -7,6 +7,7 @@ function TechnicianForm() {
         employee_id: '',
     });
     const [isCreated, setIsCreated] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     const handleFormChange = (event) => {
         const value = event.target.value;
@@ -33,11 +34,20 @@ function TechnicianForm() {
                 employee_id: '',
             });
             setIsCreated(true);
+        } else {
+            setIsError(true);
+            throw new Error('Error');
         }
     };
 
     let formClasses = "";
     let successClasses = "alert alert-success mb-0 d-none";
+    let errorClasses = "alert alert-danger mb-0 d-none";
+
+    if (isError) {
+        formClasses = "d-none";
+        errorClasses = "alert alert-danger mb-0";
+    }
     if (isCreated) {
         formClasses = "d-none";
         successClasses = "alert alert-success mb-0";
@@ -66,9 +76,12 @@ function TechnicianForm() {
             <div className={successClasses}>
                 Congratulations! You've added a new technician!
             </div>
+            <div className={errorClasses}>
+                Something went wrong. Please confirm your employee ID.
+            </div>
           </div>
         </div>
       </div>
     );
-}
-export default TechnicianForm
+};
+export default TechnicianForm;

@@ -14,7 +14,7 @@ function VehicleModelForm() {
         if (response.ok) {
             const data = await response.json();
             setManufacturers(data.manufacturers);
-        };
+        }
     };
     useEffect(() => {fetchManufacturers();}, []);
 
@@ -43,7 +43,7 @@ function VehicleModelForm() {
                 manufacturer_id: '',
             });
             setIsCreated(true);
-        };
+        }
     };
 
     let formClasses = "";
@@ -86,5 +86,5 @@ function VehicleModelForm() {
         </div>
       </div>
     );
-}
-export default VehicleModelForm
+};
+export default VehicleModelForm;

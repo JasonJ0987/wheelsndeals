@@ -1,22 +1,40 @@
 import React, { useEffect, useState } from 'react';
 
 function SalespersonList(){
-    const [salesperson, setSalesperson] = useState([]);
+    const [salespeople, setSalespeople] = useState([]);
+    const [del, setDel] = useState(null);
 
     const loadSalesperson = async() => {
         const url = "http://localhost:8090/api/salespeople/";
         const response = await fetch(url);
         if (response.ok) {
             const data = await response.json();
-            setSalesperson(data.salespeople);
-        };
+            setSalespeople(data.salespeople);
+        }
     };
     useEffect(() => {
         loadSalesperson();
     }, []);
 
+    const handleConfirmDelete = async (event, salespersonId) => {
+        event.preventDefault();
+        const url = `http://localhost:8090/api/salespeople/${salespersonId}/`;
+
+        const fetchConfig = {
+            method: "DELETE",
+        };
+
+        const response = await fetch(url, fetchConfig);
+        if (response.ok) {
+            setSalespeople(salespeople.filter(salesperson => salesperson.employee_id !== salespersonId));
+        }
+    };
+
+    const handleCancelDelete = () => { setDel(null) };
+    const handleDelete = (salespersonID) => { setDel(salespersonID) };
+
     return(
-        <div>
+        <div className="container">
             <h1>Salespeople</h1>
             <table className="table table-striped">
                 <thead>
@@ -27,7 +45,7 @@ function SalespersonList(){
                     </tr>
                 </thead>
                 <tbody>
-                    {salesperson.map(employee => (
+                    {salespeople.map(employee => (
                         <tr key={employee.employee_id}>
                             <td>
                                 {employee.employee_id}
@@ -38,6 +56,16 @@ function SalespersonList(){
                             <td>
                                 {employee.last_name}
                             </td>
+                            <td>
+                            {(del === employee.employee_id) ? (
+                                <div className="d-grid gap-2">
+                                    <button onClick={(event) => handleConfirmDelete(event, employee.employee_id)} className="btn btn-outline-danger btn-sm" type="button">Confirm Delete</button>
+                                    <button onClick={() => handleCancelDelete()} className="btn btn-outline-danger btn-sm" type="button">Cancel Delete</button>
+                                </div>
+                            ) : (
+                                <button onClick={() => handleDelete(employee.employee_id)} className="btn btn-outline-danger btn-sm">Delete</button>
+                            )}
+                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -47,4 +75,4 @@ function SalespersonList(){
 };
 
 
-export default SalespersonList
+export default SalespersonList;
