@@ -9,6 +9,11 @@ import VehicleModelForm from './VehicleModelForm';
 import VehicleModelsList from './VehicleModelsList';
 import SalespersonForm from './SalespersonForm';
 import SalespersonList from './SalespersonList';
+import CustomersList from './CustomersList';
+import CustomersForm from './CustomersForm';
+import SalesForm from './SalesForm';
+import SalesList from './SalesList';
+import SalespersonHistory from './SalespersonHistory';
 
 
 function App() {
@@ -33,11 +38,20 @@ function App() {
           <Route path="salesperson" >
             <Route index element={<SalespersonList />}/>
             <Route path="new" element={<SalespersonForm />}/>
+            <Route path="history" element={<SalespersonHistory/>}/>
+          </Route>
+          <Route path="customers" >
+            <Route index element={<CustomersList />}/>
+            <Route path="new" element={<CustomersForm />}/>
+          </Route>
+          <Route path="sales" >
+            <Route index element={<SalesList/>}/>
+            <Route path="new" element={<SalesForm />}/>
           </Route>
         </Routes>
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

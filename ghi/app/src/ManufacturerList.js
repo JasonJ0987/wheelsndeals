@@ -32,7 +32,7 @@ function ManufacturerList() {
                             {manufacturer.name}
                         </td>
                     </tr>
-                ))}
+                ))};
             </tbody>
         </table>
         </>

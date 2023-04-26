@@ -305,7 +305,7 @@ def api_sales(request, vin=None):
 
         if autoVO.sold == True:
             return JsonResponse(
-                {"message": "This sale has already been completed"},
+                {"message": "This sale has already been completed"}, status=400,
             )
 
         autoVO.sold = True

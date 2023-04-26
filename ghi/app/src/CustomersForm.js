@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-
-function SalespersonForm() {
+function CustomersForm(){
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
-        employee_id: '',
+        address: '',
+        phone_number:'',
     });
     const [isCreated, setIsCreated] = useState(false);
 
@@ -16,7 +16,7 @@ function SalespersonForm() {
     };
     const handleSubmit = async (event) =>{
         event.preventDefault();
-        const url = 'http://localhost:8090/api/salespeople/';
+        const url = 'http://localhost:8090/api/customers/';
         const fetchConfig = {
             method:"post",
             body: JSON.stringify(formData),
@@ -29,7 +29,8 @@ function SalespersonForm() {
             setFormData({
                 first_name: '',
                 last_name: '',
-                employee_id: '',
+                address: '',
+                phone_number:'',
             });
             setIsCreated(true);
         };
@@ -45,7 +46,7 @@ function SalespersonForm() {
         <div className="row">
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
-            <h1>Add a Salesperson</h1>
+            <h1>Please fill in your information!</h1>
             <form onSubmit={handleSubmit} className={formClasses}>
               <div className="form-floating mb-3">
                 <input onChange={handleFormChange} value={formData.first_name} placeholder="First name..." required type="text" name="first_name" className="form-control" />
@@ -56,18 +57,22 @@ function SalespersonForm() {
                 <label htmlFor="last_name">Last name...</label>
               </div>
               <div className="form-floating mb-3">
-                <input onChange={handleFormChange} value={formData.employee_id} placeholder="Employee ID..." required type="text" name="employee_id" className="form-control" />
-                <label htmlFor="employee_id">Employee ID...</label>
+                <input onChange={handleFormChange} value={formData.address} placeholder="Address..." required type="text" name="address" className="form-control" />
+                <label htmlFor="address">Address...</label>
+              </div>
+              <div className="form-floating mb-3">
+                <input onChange={handleFormChange} value={formData.phone_number} placeholder="Phone number..." required type="text" name="phone_number" className="form-control" />
+                <label htmlFor="phone_number">Phone number...</label>
               </div>
               <button className="btn btn-primary">Create</button>
             </form>
             <div className={successClasses}>
-                Congratulations! Welcome to the CarCar Team!
+                Congratulations! Welcome to the CarCar Family!
             </div>
           </div>
         </div>
       </div>
-    )
-}
+    );
+};
 
-export default SalespersonForm;
+export default CustomersForm;
