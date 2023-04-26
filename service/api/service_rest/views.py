@@ -8,6 +8,7 @@ from .models import Technician, AutomobileVO, Appointment
 class TechnicianEncoder(ModelEncoder):
     model = Technician
     properties = [
+        "id",
         "employee_id",
         "first_name",
         "last_name",
@@ -89,7 +90,7 @@ def api_list_appointment(request):
                 {"message": "Invalid technician"},
                 status=400,
             )
-        appointment = Appointment.objects.create(**content)
+        appointment = Appointment.create(**content)
         return JsonResponse(
             appointment,
             encoder=AppointmentEncoder,
