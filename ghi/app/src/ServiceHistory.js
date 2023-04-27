@@ -17,10 +17,10 @@ function ServiceHistory() {
     useEffect(() => {loadAppointments();}, []);
 
     const loadAutomobiles = async () => {
-        const response = await fetch('http://localhost:8080/api/automobiles_vo');
+        const response = await fetch('http://localhost:8100/api/automobiles');
         if (response.ok) {
             const data = await response.json();
-            setAutomobiles(data.automobiles);
+            setAutomobiles(data.autos);
         }
     };
     useEffect(() => {loadAutomobiles();}, []);
@@ -81,7 +81,7 @@ function ServiceHistory() {
                     <tr key={appointment.id}>
                         <td>{appointment.vin}</td>
                         <td>
-                            {(automobiles.some(automobile => automobile.vin === appointment.vin))? "YES": "No"}
+                            {(automobiles.some(automobile => (automobile.vin === appointment.vin && automobile.sold === true)))? "YES": "No"}
                         </td>
                         <td>{appointment.customer}</td>
                         <td>{new Date(appointment.date_time).toLocaleDateString()}</td>
@@ -97,7 +97,7 @@ function ServiceHistory() {
                     <tr key={appointment.id}>
                         <td>{appointment.vin}</td>
                         <td>
-                            {(automobiles.some(automobile => automobile.vin === appointment.vin))? "YES": "No"}
+                            {(automobiles.some(automobile => (automobile.vin === appointment.vin && automobile.sold === true)))? "YES": "No"}
                         </td>
                         <td>{appointment.customer}</td>
                         <td>{new Date(appointment.date_time).toLocaleDateString()}</td>
