@@ -125,7 +125,7 @@ function SalespersonForm() {
     return(
         <div className="row">
         <div className="offset-3 col-6">
-          <div className="shadow p-4 mt-4">
+            <div className="shadow p-4 mt-4">
             <h1>Record a new sale</h1>
             <form onSubmit={handleSubmit} className={formClasses}>
                 <div className="mb-3">
@@ -142,23 +142,23 @@ function SalespersonForm() {
                 <div className="mb-3">
                 <label htmlFor="salesperson">Choose a salesperson</label>
                 <select onChange={handleFormChange} value={formData.salesperson} required name="salesperson" className="form-select">
-                  <option value="">Choose a salesperson...</option>
-                  {salespeople.map(salesperson => (
-                    <option key={salesperson.employee_id} value={salesperson.employee_id}>
-                        {salesperson.first_name} {salesperson.last_name}
-                    </option>
-                  ))}
+                    <option value="">Choose a salesperson...</option>
+                        {salespeople.map(salesperson => (
+                            <option key={salesperson.employee_id} value={salesperson.employee_id}>
+                                {salesperson.first_name} {salesperson.last_name}
+                            </option>
+                        ))}
                 </select>
                 </div>
                 <div className="mb-3">
                 <label htmlFor="customer">Choose a customer</label>
                 <select onChange={handleFormChange} value={formData.customer} required name="customer" className="form-select">
-                  <option value="">Choose a customer...</option>
-                  {customers.map(customer => (
-                    <option key={customer.id} value={customer.id}>
-                        {customer.first_name} {customer.last_name}
-                    </option>
-                  ))}
+                    <option value="">Choose a customer...</option>
+                    {customers.map(customer => (
+                        <option key={customer.id} value={customer.id}>
+                            {customer.first_name} {customer.last_name}
+                        </option>
+                    ))}
                 </select>
                 </div>
                 <div className="form-floating mb-3">
@@ -166,7 +166,7 @@ function SalespersonForm() {
                     <label htmlFor="price">Price...</label>
                 </div>
 
-              <button className="btn btn-primary">Submit</button>
+                <button className="btn btn-primary">Submit</button>
             </form>
             <div className={successClasses}>
                 Congratulations on your sale!
@@ -174,9 +174,9 @@ function SalespersonForm() {
             <div className={errorClasses}>
                 Something went wrong. Please confirm your VIN.
             </div>
-          </div>
+            </div>
         </div>
-      </div>
+        </div>
     );
 };
 

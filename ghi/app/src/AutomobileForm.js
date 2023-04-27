@@ -87,7 +87,7 @@ function AutomobileForm() {
                   <option value="">Choose a model...</option>
                   {models.map(model => (
                     <option key={model.id} value={model.id}>
-                        {model.name}
+                      {model.name}
                     </option>
                   ))}
                 </select>
@@ -95,10 +95,10 @@ function AutomobileForm() {
               <button className="btn btn-primary">Create</button>
             </form>
             <div className={successClasses}>
-                Congratulations! You've added a new automobile!
+              Congratulations! You've added a new automobile!
             </div>
             <div className={errorClasses}>
-                Something went wrong. Please confirm your VIN.
+              Something went wrong. Please confirm your VIN.
             </div>
           </div>
         </div>

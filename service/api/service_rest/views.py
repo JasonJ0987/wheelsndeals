@@ -5,6 +5,7 @@ from .models import Technician, AutomobileVO, Appointment
 from .encoders import TechnicianEncoder, AutomobileVOEncoder, AppointmentEncoder
 import json
 
+
 @require_http_methods(["GET", "POST"])
 def api_list_technician(request):
     if request.method == "GET":
@@ -13,7 +14,7 @@ def api_list_technician(request):
             {"technicians": technicians},
             encoder=TechnicianEncoder,
         )
-    else:  #"POST"
+    else:
         content = json.loads(request.body)
         try:
             technician = Technician.objects.create(**content)
@@ -23,7 +24,11 @@ def api_list_technician(request):
                 safe=False,
             )
         except IntegrityError:
-            return JsonResponse({"message": "Technician already exists"}, status=400)
+            return JsonResponse(
+                {"message": "Technician already exists"},
+                status=400
+            )
+
 
 @require_http_methods(["DELETE"])
 def api_technician(request, pk):
@@ -38,6 +43,7 @@ def api_technician(request, pk):
     except Technician.DoesNotExist:
         return JsonResponse({"message": "Technician does not exist"})
 
+
 @require_http_methods(["GET"])
 def api_list_automobileVO(request):
     if request.method == "GET":
@@ -47,6 +53,7 @@ def api_list_automobileVO(request):
             encoder=AutomobileVOEncoder,
         )
 
+
 @require_http_methods(["GET", "POST"])
 def api_list_appointment(request):
     if request.method == "GET":
@@ -55,7 +62,7 @@ def api_list_appointment(request):
             {"appointments": appointments},
             encoder=AppointmentEncoder,
         )
-    else:  #"POST"
+    else:
         content = json.loads(request.body)
         try:
             technician = Technician.objects.get(employee_id=content["technician"])
@@ -68,13 +75,16 @@ def api_list_appointment(request):
         try:
             appointment = Appointment.create(**content)
         except DataError:
-            return JsonResponse({"message": "Confirm VIN is composed of 17 characters"}, status=400)
-
+            return JsonResponse(
+                {"message": "Confirm VIN is composed of 17 characters"},
+                status=400
+            )
         return JsonResponse(
             appointment,
             encoder=AppointmentEncoder,
             safe=False,
         )
+
 
 @require_http_methods(["DELETE"])
 def api_appointment(request, pk):
@@ -92,6 +102,7 @@ def api_appointment(request, pk):
             status=404,
         )
 
+
 @require_http_methods(["PUT"])
 def api_appointment_cancel(request, pk):
     try:
@@ -108,6 +119,7 @@ def api_appointment_cancel(request, pk):
         safe=False,
     )
 
+
 @require_http_methods(["PUT"])
 def api_appointment_finish(request, pk):
     try:
@@ -123,3 +135,4 @@ def api_appointment_finish(request, pk):
         encoder=AppointmentEncoder,
         safe=False,
     )
+

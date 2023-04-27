@@ -49,19 +49,19 @@ function ServiceHistory() {
     }
 
     return (
-      <div className='container'>
+        <div className='container'>
         <h1 className="mt-4">Service History</h1>
         <div className="d-flex align-items-center mb-3">
-          <form onSubmit={handleSearch} className="flex-grow-1 me-3">
+            <form onSubmit={handleSearch} className="flex-grow-1 me-3">
             <div className="input-group">
-              <div className="form-floating flex-grow-1">
-                <input onChange={handleVinChange} value={vin} name="vin" placeholder="Search by VIN..." required type="text" className="form-control" />
-                <label htmlFor="vin">Search by VIN...</label>
-              </div>
-              <button className="btn btn-outline-secondary">Search</button>
+                <div className="form-floating flex-grow-1">
+                    <input onChange={handleVinChange} value={vin} name="vin" placeholder="Search by VIN..." required type="text" className="form-control" />
+                    <label htmlFor="vin">Search by VIN...</label>
+                </div>
+                <button className="btn btn-outline-secondary">Search</button>
             </div>
-          </form>
-          <button onClick={handleClickAllServiceHistory} className="btn btn-outline-secondary">All Service History</button>
+            </form>
+            <button onClick={handleClickAllServiceHistory} className="btn btn-outline-secondary">All Service History</button>
         </div>
         <table className='table table-striped'>
             <thead>
@@ -109,7 +109,7 @@ function ServiceHistory() {
                 ))}
             </tbody>
         </table>
-      </div>
+        </div>
     );
 };
 export default ServiceHistory;

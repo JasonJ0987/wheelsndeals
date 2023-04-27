@@ -39,7 +39,7 @@ function AppointmentForm() {
         data.date_time = new Date(`${formData.date}T${formData.time}`).toISOString();
         data.technician = formData.technician;
         data.reason = formData.reason;
-      
+
         const url = "http://localhost:8080/api/appointments/";
         const fetchConfig = {
             method: "post",
@@ -50,12 +50,12 @@ function AppointmentForm() {
 
         if (response.ok) {
             setFormData({
-              vin: '',
-              customer: '',
-              date: '',
-              time: '',
-              technician: '',
-              reason: '',
+                vin: '',
+                customer: '',
+                date: '',
+                time: '',
+                technician: '',
+                reason: '',
             });
             setIsCreated(true);
         } else {
@@ -73,8 +73,8 @@ function AppointmentForm() {
         errorClasses = "alert alert-danger mb-0";
     }
     if (isCreated) {
-      formClasses = "d-none";
-      successClasses = "alert alert-success mb-0";
+        formClasses = "d-none";
+        successClasses = "alert alert-success mb-0";
     }
 
     return (
@@ -104,7 +104,7 @@ function AppointmentForm() {
                   <option value="">Choose a technician...</option>
                   {technicians.map(technician => (
                     <option key={technician.employee_id} value={technician.employee_id}>
-                        {technician.first_name} {technician.last_name}
+                      {technician.first_name} {technician.last_name}
                     </option>
                   ))}
                 </select>
@@ -116,7 +116,7 @@ function AppointmentForm() {
               <button className="btn btn-primary">Create</button>
             </form>
             <div className={successClasses}>
-                Congratulations! You've successfully made an appointment!
+              Congratulations! You've successfully made an appointment!
             </div>
             <div className={errorClasses}>
                 Something went wrong. Please confirm your VIN is composed of 17 characters.

@@ -16,9 +16,12 @@ Simple view of available services and intuitive booking system.
 View and create all employees and customers.
 
 Record and track all appointments made through the services system.
-Keep track of which appointments are finished or canceled with the search history.
+Keep track of which appointments are created, canceled or finished with the search history.
 
-A service concierge could create and view service appointments, as well as change the appointment status to canceled or finished with a button. Based on the VIP status, the service concierge can give that customer "VIP treatment"
+A service concierge could create and view service appointments, as well as change the appointment status to canceled or finished with a button. Based on the VIP status, the service concierge can give that customer "VIP treatment".
+
+The design to determine if the customer is a VIP is that if the automobile with the unique VIN is in the inventory and if that automobile is sold to a customer. If both conditions pass, the appointment is registered as a VIP with that automobile.
+There are "cancel" and "finish" buttons to alter the appointment status and every appointment is initialized with a "created" status.
 
 Record and track all sales made through the sales system.
 View sales organized by employees to keep track of employee's commissions.
@@ -35,8 +38,7 @@ The Technician model tracks the technician's employee ID, first name and last na
 The Appointment model tracks the VIN, customer, local date and time, reason, technician (with its employee ID) and status (which are "created", "canceled", or "finished").
 Note that the VIN in Appointment could be any VIN that's less than or equal to 17 characters. Note that to make a service appointment, the VIN could occur as many times as wanted. Note that the technician's employee ID must be unique. Note that customer could be any customer regardless if they have a registered sale in our dealership or not.
 The AutomobileVO polls for Automobile data from the Inventory microservice.
-As the requirement states, quoted here -- "If the VIN is for an automobile that was at one time in the inventory, then the automobile was purchased from the dealership. The list of scheduled appointments should show that the automobile was purchased from the dealership so that the concierge can give that customer 'VIP treatment'". The design to determine if the customer is a VIP is that if the automobile with the unique VIN is in the inventory and if that automobile is sold. If both conditions pass, the customer is registered as a VIP with that automobile.
-There are "cancel" and "finish" buttons to alter the appointment status and every appointment is initialized with a "created" status.
+As the requirement states, quoted here -- "If the VIN is for an automobile that was at one time in the inventory, then the automobile was purchased from the dealership. The list of scheduled appointments should show that the automobile was purchased from the dealership so that the concierge can give that customer 'VIP treatment'". The design to determine if the customer is a VIP is that if the automobile with the unique VIN is in the inventory and if that automobile is sold to a customer. If both conditions pass, the appointment is registered as a VIP with that automobile.
 
 ## Sales microservice
 
