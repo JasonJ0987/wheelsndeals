@@ -32,7 +32,7 @@ function TechnicianList() {
 
     return (
         <div className='container'>
-        <h1>Technicians</h1>
+        <h1 className="mt-4">Technicians</h1>
         <table className='table table-striped'>
             <thead>
                 <tr>

@@ -1,38 +1,22 @@
 import React, { useState, useEffect } from 'react';
 
 function AppointmentForm() {
-    const [vin, setVin] = useState("");
-    const [customer, setCustomer] = useState("");
-    const [date, setDate] = useState("");
-    const [time, setTime] = useState("");
-    const [technician, setTechnician] = useState("");
-    const [reason, setReason] = useState("");
+    const [formData, setFormData] = useState({
+        vin: '',
+        customer: '',
+        date: '',
+        time: '',
+        technician: '',
+        reason: '',
+    });
+
     const [isCreated, setIsCreated] = useState(false);
     const [isError, setIsError] = useState(false);
 
-    const handleVinChange = (event) => {
+    const handleFormChange = (event) => {
         const value = event.target.value;
-        setVin(value);
-    };
-    const handleCustomerChange = (event) => {
-        const value = event.target.value;
-        setCustomer(value);
-    };
-    const handleDateChange = (event) => {
-        const value = event.target.value;
-        setDate(value);
-    };
-    const handleTimeChange = (event) => {
-        const value = event.target.value;
-        setTime(value);
-    };
-    const handleTechnicianChange = (event) => {
-        const value = event.target.value;
-        setTechnician(value);
-    };
-    const handleReasonChange = (event) => {
-        const value = event.target.value;
-        setReason(value);
+        const inputName = event.target.name;
+        setFormData({...formData ,[inputName]: value});
     };
 
     const [technicians, setTechnicians] = useState([]);
@@ -50,12 +34,12 @@ function AppointmentForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {};
-        data.vin = vin;
-        data.customer = customer;
-        data.date_time = `${date} ${time}`;
-        data.technician = technician;
-        data.reason = reason;
-
+        data.vin = formData.vin;
+        data.customer = formData.customer;
+        data.date_time = new Date(`${formData.date}T${formData.time}`).toISOString();
+        data.technician = formData.technician;
+        data.reason = formData.reason;
+      
         const url = "http://localhost:8080/api/appointments/";
         const fetchConfig = {
             method: "post",
@@ -63,13 +47,16 @@ function AppointmentForm() {
             headers: { 'Content-Type': 'application/json', },
         };
         const response = await fetch(url, fetchConfig);
+
         if (response.ok) {
-            setVin("");
-            setCustomer("");
-            setDate("");
-            setTime("");
-            setTechnician("");
-            setReason("");
+            setFormData({
+              vin: '',
+              customer: '',
+              date: '',
+              time: '',
+              technician: '',
+              reason: '',
+            });
             setIsCreated(true);
         } else {
             setIsError(true);
@@ -97,27 +84,23 @@ function AppointmentForm() {
             <h1>Create a service appointment</h1>
             <form className={formClasses} onSubmit={handleSubmit} >
               <div className="form-floating mb-3">
-                <input onChange={handleVinChange} value={vin} name="vin" placeholder="Automobile VIN..." required type="text" className="form-control" />
+                <input onChange={handleFormChange} value={formData.vin} name="vin" placeholder="Automobile VIN..." required type="text" className="form-control" />
                 <label htmlFor="vin">Automobile VIN...</label>
               </div>
               <div className="form-floating mb-3">
-                <input onChange={handleCustomerChange} value={customer} name="customer" placeholder="Customer..." required type="text" className="form-control" />
+                <input onChange={handleFormChange} value={formData.customer} name="customer" placeholder="Customer..." required type="text" className="form-control" />
                 <label htmlFor="customer">Customer...</label>
               </div>
               <div className="form-floating mb-3">
-                <input onChange={handleDateChange} value={date} name="date" placeholder="Date..." required type="date" className="form-control" />
+                <input onChange={handleFormChange} value={formData.date} name="date" placeholder="Date..." required type="date" className="form-control" />
                 <label htmlFor="date">Date...</label>
               </div>
               <div className="form-floating mb-3">
-                <input onChange={handleTimeChange} value={time} name="time" placeholder="Time..." required type="time" className="form-control" />
+                <input onChange={handleFormChange} value={formData.time} name="time" placeholder="Time..." required type="time" className="form-control" />
                 <label htmlFor="time">Time...</label>
               </div>
-              <div className="form-floating mb-3">
-                <input onChange={handleReasonChange} value={reason} name="reason" placeholder="Reason..." required type="text" className="form-control" />
-                <label htmlFor="reason">Reason...</label>
-              </div>
               <div className="mb-3">
-                <select required onChange={handleTechnicianChange} value={technician} name="technician" className="form-select">
+                <select required onChange={handleFormChange} value={formData.technician} name="technician" className="form-select">
                   <option value="">Choose a technician...</option>
                   {technicians.map(technician => (
                     <option key={technician.employee_id} value={technician.employee_id}>
@@ -126,13 +109,17 @@ function AppointmentForm() {
                   ))}
                 </select>
               </div>
+              <div className="form-floating mb-3">
+                <input onChange={handleFormChange} value={formData.reason} name="reason" placeholder="Reason..." required type="text" className="form-control" />
+                <label htmlFor="reason">Reason...</label>
+              </div>
               <button className="btn btn-primary">Create</button>
             </form>
             <div className={successClasses}>
                 Congratulations! You've successfully made an appointment!
             </div>
             <div className={errorClasses}>
-                Something went wrong. Please ensure your VIN is 17 characters.
+                Something went wrong. Please confirm your VIN is composed of 17 characters.
             </div>
           </div>
         </div>

@@ -36,7 +36,7 @@ function AutomobileList() {
 
     return (
         <div className='container'>
-        <h1>Automobiles</h1>
+        <h1 className="mt-4">Automobiles</h1>
         <table className="table table-striped">
             <thead>
                 <tr>

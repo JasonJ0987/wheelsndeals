@@ -18,7 +18,7 @@ function SalesForm() {
 
     return(
         <div className="container">
-            <h1>Sales</h1>
+            <h1 className="mt-4">Sales</h1>
             <table className="table table-striped">
                 <thead>
                     <tr>
