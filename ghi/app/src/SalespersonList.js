@@ -35,7 +35,7 @@ function SalespersonList(){
 
     return(
         <div className="container">
-            <h1>Salespeople</h1>
+            <h1 className="mt-4">Salespeople</h1>
             <table className="table table-striped">
                 <thead>
                     <tr>

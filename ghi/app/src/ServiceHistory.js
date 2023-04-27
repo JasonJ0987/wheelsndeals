@@ -36,6 +36,11 @@ function ServiceHistory() {
         setIsSearch(true);
     };
 
+    const handleClickAllServiceHistory = () => {
+        setIsSearch(false);
+        setVin("");
+    }
+
     let wholeClasses = "";
     let filteredClasses = "d-none";
     if (isSearch) {
@@ -44,15 +49,18 @@ function ServiceHistory() {
     }
 
     return (
-        <div className='container'>
-        <h1>Service History</h1>
+      <div className='container'>
+        <h1 className="mt-4">Service History</h1>
         <form onSubmit={handleSearch}>
-            <div className="form-floating mb-3">
-                <input onChange={handleVinChange} value={vin} name="vin" placeholder="Search by VIN..." required type="text" className="form-control" />
-                <label htmlFor="vin">Search by VIN...</label>
+            <div className="input-group mb-3">
+                <div className="form-floating col-md-8">
+                    <input onChange={handleVinChange} value={vin} name="vin" placeholder="Search by VIN..." required type="text" className="form-control" />
+                    <label htmlFor="vin">Search by VIN...</label>
+                </div>
+                <button className="btn btn-outline-secondary">Search</button>
             </div>
-            <button className="btn btn-primary">Search</button>
         </form>
+        <button onClick={handleClickAllServiceHistory} className="btn btn-outline-secondary">All Service History</button>
         <table className='table table-striped'>
             <thead>
                 <tr>
@@ -99,7 +107,7 @@ function ServiceHistory() {
                 ))}
             </tbody>
         </table>
-        </div>
+      </div>
     );
 };
 export default ServiceHistory;

@@ -36,7 +36,7 @@ function CustomersList(){
 
     return(
         <div className="container">
-            <h1>Customers</h1>
+            <h1 className="mt-4">Customers</h1>
             <table className="table table-striped">
                 <thead>
                     <tr>

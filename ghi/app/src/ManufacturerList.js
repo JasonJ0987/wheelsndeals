@@ -36,7 +36,7 @@ function ManufacturerList() {
 
     return (
         <div className='container'>
-        <h1>Manufacturers</h1>
+        <h1 className="mt-4">Manufacturers</h1>
         <table className="table table-striped">
             <thead>
                 <tr>

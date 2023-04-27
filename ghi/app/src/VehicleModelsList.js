@@ -31,7 +31,7 @@ function VehicleModelsList() {
     const handleDelete = (modelID) => { setDel(modelID) };
     return (
         <div className='container'>
-        <h1>Models</h1>
+        <h1 className="mt-4">Models</h1>
         <table className='table table-striped'>
             <thead>
                 <tr>

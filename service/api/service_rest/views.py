@@ -1,18 +1,9 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-import json
-
-from common.json import ModelEncoder
+from django.db import IntegrityError, DataError
 from .models import Technician, AutomobileVO, Appointment
-
-class TechnicianEncoder(ModelEncoder):
-    model = Technician
-    properties = [
-        "id",
-        "employee_id",
-        "first_name",
-        "last_name",
-    ]
+from .encoders import TechnicianEncoder, AutomobileVOEncoder, AppointmentEncoder
+import json
 
 @require_http_methods(["GET", "POST"])
 def api_list_technician(request):
@@ -24,12 +15,15 @@ def api_list_technician(request):
         )
     else:  #"POST"
         content = json.loads(request.body)
-        technician = Technician.objects.create(**content)
-        return JsonResponse(
-            technician,
-            encoder=TechnicianEncoder,
-            safe=False,
-        )
+        try:
+            technician = Technician.objects.create(**content)
+            return JsonResponse(
+                technician,
+                encoder=TechnicianEncoder,
+                safe=False,
+            )
+        except IntegrityError:
+            return JsonResponse({"message": "Technician already exists"}, status=400)
 
 @require_http_methods(["DELETE"])
 def api_technician(request, pk):
@@ -44,10 +38,6 @@ def api_technician(request, pk):
     except Technician.DoesNotExist:
         return JsonResponse({"message": "Technician does not exist"})
 
-class AutomobileVOEncoder(ModelEncoder):
-    model = AutomobileVO
-    properties = ["vin"]
-
 @require_http_methods(["GET"])
 def api_list_automobileVO(request):
     if request.method == "GET":
@@ -56,21 +46,6 @@ def api_list_automobileVO(request):
             {"automobiles": automobiles},
             encoder=AutomobileVOEncoder,
         )
-
-class AppointmentEncoder(ModelEncoder):
-    model = Appointment
-    properties = [
-        "id",
-        "date_time",
-        "reason",
-        "status",
-        "vin",
-        "customer",
-        "technician",
-    ]
-    encoders = {
-        "technician": TechnicianEncoder(),
-    }
 
 @require_http_methods(["GET", "POST"])
 def api_list_appointment(request):
@@ -90,7 +65,11 @@ def api_list_appointment(request):
                 {"message": "Invalid technician"},
                 status=400,
             )
-        appointment = Appointment.create(**content)
+        try:
+            appointment = Appointment.create(**content)
+        except DataError:
+            return JsonResponse({"message": "Confirm VIN is composed of 17 characters"}, status=400)
+
         return JsonResponse(
             appointment,
             encoder=AppointmentEncoder,
@@ -115,7 +94,13 @@ def api_appointment(request, pk):
 
 @require_http_methods(["PUT"])
 def api_appointment_cancel(request, pk):
-    appointment = Appointment.objects.get(id=pk)
+    try:
+        appointment = Appointment.objects.get(id=pk)
+    except Appointment.DoesNotExist:
+        return JsonResponse(
+            {"message": "Appointment does not exist"},
+            status=404,
+        )
     appointment.cancel_appointment()
     return JsonResponse(
         appointment,
@@ -125,7 +110,13 @@ def api_appointment_cancel(request, pk):
 
 @require_http_methods(["PUT"])
 def api_appointment_finish(request, pk):
-    appointment = Appointment.objects.get(id=pk)
+    try:
+        appointment = Appointment.objects.get(id=pk)
+    except Appointment.DoesNotExist:
+        return JsonResponse(
+            {"message": "Appointment does not exist"},
+            status=404,
+        )
     appointment.finish_appointment()
     return JsonResponse(
         appointment,
