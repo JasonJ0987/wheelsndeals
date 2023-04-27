@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
@@ -280,7 +278,7 @@ def api_sales(request, vin=None):
 @require_http_methods(["DELETE"])
 def api_sale(request, id):
     """
-
+    Deletes a sale
     """
     try:
         sale = Sale.objects.get(id=id)

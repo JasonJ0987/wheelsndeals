@@ -15,8 +15,11 @@ Simple view of available services and intuitive booking system.
 
 View and create all employees and customers.
 
+Record and track all appointments made through the services system.
+Keep track of which appointments are finished or canceled with the search function.
+
 Record and track all sales made through the sales system.
-View sales organized by who made the sale to keep track of employee's commissions.
+View sales organized by employees to keep track of employee's commissions.
 A successful sale of a car will automatically update the inventory microservice to update the status of the car being sold.
 
 ## Service microservice
