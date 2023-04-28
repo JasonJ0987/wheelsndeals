@@ -9,39 +9,6 @@ from django.db import IntegrityError
 
 @require_http_methods(["GET", "POST"])
 def api_salespeople(request):
-    """
-    RESTful API handler for salespeople
-
-    GET:
-    Returns list of salespeople
-    Expect a return list of salespeople
-    {
-        "salesperson": [
-                {
-                    "first_name": fn,
-                    "last_name": ln,
-                    "employee_id": ei
-                }
-            ]
-    }
-
-    POST:
-    Creates new salesperson
-    Expect return of details of new salesperson
-    input:
-    {
-        "first_name": fn,
-        "last_name": ln,
-        "employee_id": ei
-    }
-    output:
-    {
-        "first_name": fn,
-        "last_name": ln,
-        "employee_id": ei
-    }
-
-    """
     if request.method == "GET":
         salesperson = Salesperson.objects.all()
         return JsonResponse(
@@ -61,11 +28,9 @@ def api_salespeople(request):
             safe=False,
         )
 
+
 @require_http_methods(["DELETE"])
 def api_salesperson(request, id):
-    """
-    Deletes a salesperson
-    """
     try:
         salesperson = Salesperson.objects.get(employee_id=id)
         salesperson.delete()
@@ -80,42 +45,6 @@ def api_salesperson(request, id):
 
 @require_http_methods(["GET", "POST"])
 def api_customers(request):
-    """
-    RESTful API handler for customers
-
-    GET:
-    Returns list of customers
-    Expect a return list of customers
-    {
-        "customer": [
-                {
-                    "first_name": fn,
-                    "last_name": ln,
-                    "address": address,
-                    "phone_number": pn
-                }
-            ]
-    }
-
-    POST:
-    Creates new customer
-    Expect return of details of new customer
-    input:
-    {
-        "first_name": fn,
-        "last_name": ln,
-        "address": address,
-        "phone_number": pn
-    }
-    output:
-    {
-        "first_name": fn,
-        "last_name": ln,
-        "address": address,
-        "phone_number": pn
-    }
-
-    """
     if request.method == "GET":
         customer = Customer.objects.all()
         return JsonResponse(
@@ -139,9 +68,6 @@ def api_customers(request):
 
 @require_http_methods(["DELETE"])
 def api_customer(request, id):
-    """
-    Deletes a customer
-    """
     try:
         customer = Customer.objects.get(id=id)
         customer.delete()
@@ -156,74 +82,6 @@ def api_customer(request, id):
 
 @require_http_methods(["GET", "POST"])
 def api_sales(request, vin=None):
-    """
-    RESTful API handler for customers
-
-    GET:
-    Returns list of customers
-    Expect a return list of customers
-    {
-        "sales": [
-            {
-                "id": id,
-                "automobile": {
-                    "vin": vin,
-                    "sold": boolean
-                },
-                "salesperson": {
-                    "id": spid,
-                    "first_name": fn,
-                    "last_name": ln,
-                    "employee_id": eid
-                },
-                "customer": {
-                    "id": cid,
-                    "first_name": fn,
-                    "last_name": ln,
-                    "address": addy,
-                    "phone_number": #
-                },
-                "price": price
-            }
-        ]
-    }
-
-    POST:
-    Creates new customer
-    Expect return of details of new customer
-    input:
-    {
-        "automobile": vin,
-        "salesperson": eid,
-        "customer": cid,
-        "price": price
-    }
-    output:
-    {
-        "id": id,
-        "automobile": {
-            "vin": vin,
-            "sold": true
-        },
-        "salesperson": {
-            "id": spid,
-            "first_name": fn,
-            "last_name": ln,
-            "employee_id": eid
-        },
-        "customer": {
-            "id": cid,
-            "first_name": fn,
-            "last_name": ln,
-            "address": addy,
-            "phone_number": #
-        },
-        "price": price
-    }
-
-    Upon a creation of a sale, the sold value should become true
-    If the sale already exists, then it will not be made again
-    """
     if request.method == "GET":
         if vin == None:
             sale = Sale.objects.all()
@@ -277,9 +135,6 @@ def api_sales(request, vin=None):
 
 @require_http_methods(["DELETE"])
 def api_sale(request, id):
-    """
-    Deletes a sale
-    """
     try:
         sale = Sale.objects.get(id=id)
         sale.delete()
