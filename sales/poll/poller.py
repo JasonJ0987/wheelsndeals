@@ -9,8 +9,6 @@ sys.path.append("")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sales_project.settings")
 django.setup()
 
-# Import models from sales_rest, here.
-# from sales_rest.models import Something
 from sales_rest.models import AutomobileVO
 
 def poll(test_poll=True):

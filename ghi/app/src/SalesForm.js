@@ -165,7 +165,6 @@ function SalespersonForm() {
                     <input onChange={handleFormChange} value={formData.price} placeholder="Price..." required type="number" name="price" className="form-control" />
                     <label htmlFor="price">Price...</label>
                 </div>
-
                 <button className="btn btn-primary">Submit</button>
             </form>
             <div className={successClasses}>

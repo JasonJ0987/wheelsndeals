@@ -15,7 +15,7 @@ def api_salespeople(request):
             {"salespeople": salesperson},
             encoder=SalespersonEncoder,
         )
-    else: # POST
+    else:
         content = json.loads(request.body)
         try:
             salesperson = Salesperson.objects.create(**content)
@@ -52,7 +52,7 @@ def api_customers(request):
             encoder=CustomerEncoder,
             safe=False,
         )
-    else: #POST
+    else:
         content = json.loads(request.body)
         try:
             customer = Customer.objects.create(**content)
@@ -91,7 +91,7 @@ def api_sales(request, vin=None):
             {"sales": sale},
             encoder=SaleEncoder,
         )
-    else: #POST
+    else:
         content = json.loads(request.body)
         try:
             autoVO = AutomobileVO.objects.get(vin=content["automobile"])

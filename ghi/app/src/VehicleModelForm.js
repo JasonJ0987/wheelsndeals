@@ -54,37 +54,37 @@ function VehicleModelForm() {
     }
 
     return (
-      <div className="row">
-        <div className="offset-3 col-6">
-          <div className="shadow p-4 mt-4">
-            <h1>Create a vehicle model</h1>
-            <form onSubmit={handleSubmit} className={formClasses}>
-              <div className="form-floating mb-3">
-                <input onChange={handleFormChange} value={formData.name} placeholder="Model name..." required type="text" name="name" className="form-control" />
-                <label htmlFor="name">Model name...</label>
-              </div>
-              <div className="form-floating mb-3">
-                <input onChange={handleFormChange} value={formData.picture_url} placeholder="Picture URL..." required type="url" name="picture_url" className="form-control" />
-                <label htmlFor="picture_url">Picture URL...</label>
-              </div>
-              <div className="mb-3">
-                <select onChange={handleFormChange} value={formData.manufacturer_id} required name="manufacturer_id" className="form-select">
-                  <option value="">Choose a manufacturer...</option>
-                  {manufacturers.map(manufacturer => (
-                    <option key={manufacturer.id} value={manufacturer.id}>
-                        {manufacturer.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <button className="btn btn-primary">Create</button>
-            </form>
-            <div className={successClasses}>
-                Congratulations! You've created a new vehicle model!
+        <div className="row">
+            <div className="offset-3 col-6">
+            <div className="shadow p-4 mt-4">
+                <h1>Create a vehicle model</h1>
+                <form onSubmit={handleSubmit} className={formClasses}>
+                <div className="form-floating mb-3">
+                    <input onChange={handleFormChange} value={formData.name} placeholder="Model name..." required type="text" name="name" className="form-control" />
+                    <label htmlFor="name">Model name...</label>
+                </div>
+                <div className="form-floating mb-3">
+                    <input onChange={handleFormChange} value={formData.picture_url} placeholder="Picture URL..." required type="url" name="picture_url" className="form-control" />
+                    <label htmlFor="picture_url">Picture URL...</label>
+                </div>
+                <div className="mb-3">
+                    <select onChange={handleFormChange} value={formData.manufacturer_id} required name="manufacturer_id" className="form-select">
+                    <option value="">Choose a manufacturer...</option>
+                    {manufacturers.map(manufacturer => (
+                        <option key={manufacturer.id} value={manufacturer.id}>
+                            {manufacturer.name}
+                        </option>
+                    ))}
+                    </select>
+                </div>
+                <button className="btn btn-primary">Create</button>
+                </form>
+                <div className={successClasses}>
+                    Congratulations! You've created a new vehicle model!
+                </div>
             </div>
-          </div>
+            </div>
         </div>
-      </div>
     );
 };
 export default VehicleModelForm;

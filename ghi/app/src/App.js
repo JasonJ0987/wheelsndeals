@@ -22,48 +22,48 @@ import SalespersonHistory from './SalespersonHistory';
 
 
 function App() {
-  return (
+    return (
     <BrowserRouter>
-      <Nav />
-      <Routes>
-        <Route index element={<MainPage />} />
-        <Route path="manufacturers" >
-          <Route index element={<ManufacturerList />} />
-          <Route path="new" element={<ManufacturerForm />} />
-        </Route>
-        <Route path="models" >
-          <Route index element={<VehicleModelsList />} />
-          <Route path="new" element={<VehicleModelForm />} />
-        </Route>
-        <Route path="automobiles" >
-          <Route index element={<AutomobileList />} />
-          <Route path="new" element={<AutomobileForm />} />
-        </Route>
-        <Route path="technicians" >
-          <Route index element={<TechnicianList />} />
-          <Route path="new" element={<TechnicianForm />} />
-        </Route>
-        <Route path="appointments" >
-          <Route index element={<AppointmentList />} />
-          <Route path="history" element={<ServiceHistory />}/>
-          <Route path="new" element={<AppointmentForm />} />
-        </Route>
-        <Route path="salesperson" >
-          <Route index element={<SalespersonList />}/>
-          <Route path="new" element={<SalespersonForm />}/>
-          <Route path="history" element={<SalespersonHistory/>}/>
-        </Route>
-        <Route path="customers" >
-          <Route index element={<CustomersList />}/>
-          <Route path="new" element={<CustomersForm />}/>
-        </Route>
-        <Route path="sales" >
-          <Route index element={<SalesList/>}/>
-          <Route path="new" element={<SalesForm />}/>
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  );
+        <Nav />
+            <Routes>
+                <Route index element={<MainPage />} />
+                <Route path="manufacturers" >
+                    <Route index element={<ManufacturerList />} />
+                    <Route path="new" element={<ManufacturerForm />} />
+                </Route>
+                <Route path="models" >
+                    <Route index element={<VehicleModelsList />} />
+                    <Route path="new" element={<VehicleModelForm />} />
+                </Route>
+                <Route path="automobiles" >
+                    <Route index element={<AutomobileList />} />
+                    <Route path="new" element={<AutomobileForm />} />
+                </Route>
+                <Route path="technicians" >
+                    <Route index element={<TechnicianList />} />
+                    <Route path="new" element={<TechnicianForm />} />
+                </Route>
+                <Route path="appointments" >
+                    <Route index element={<AppointmentList />} />
+                    <Route path="history" element={<ServiceHistory />}/>
+                    <Route path="new" element={<AppointmentForm />} />
+                </Route>
+                <Route path="salesperson" >
+                    <Route index element={<SalespersonList />}/>
+                    <Route path="new" element={<SalespersonForm />}/>
+                    <Route path="history" element={<SalespersonHistory/>}/>
+                </Route>
+                <Route path="customers" >
+                    <Route index element={<CustomersList />}/>
+                    <Route path="new" element={<CustomersForm />}/>
+                </Route>
+                <Route path="sales" >
+                    <Route index element={<SalesList/>}/>
+                    <Route path="new" element={<SalesForm />}/>
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    );
 };
 
 export default App;
