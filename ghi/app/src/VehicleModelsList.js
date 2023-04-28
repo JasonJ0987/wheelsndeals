@@ -45,7 +45,7 @@ function VehicleModelsList() {
                     <tr key = {model.id}>
                         <td>{ model.name }</td>
                         <td>{ model.manufacturer.name }</td>
-                        <td><img src={ model.picture_url } className="img-fluid" /></td>
+                        <td><img src={ model.picture_url } className="img-thumbnail" /></td>
                         <td>
                         {(del === model.id) ? (
                             <div className="d-grid gap-2">
