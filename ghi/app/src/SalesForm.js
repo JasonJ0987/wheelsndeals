@@ -132,7 +132,7 @@ function SalespersonForm() {
                 <label htmlFor="automobile">Choose a car</label>
                 <select onChange={handleFormChange} value={formData.automobile} required name="automobile" className="form-select">
                     <option value="">Choose a car...</option>
-                    {auto.map(car => (
+                    {auto.filter(car => car.sold === false).map(car => (
                     <option key={car.vin} value={car.vin}>
                         {car.vin}
                     </option>
