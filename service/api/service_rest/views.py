@@ -24,10 +24,7 @@ def api_list_technician(request):
                 safe=False,
             )
         except IntegrityError:
-            return JsonResponse(
-                {"message": "Technician already exists"},
-                status=400
-            )
+            return JsonResponse({"message": "Technician already exists"}, status=400)
 
 
 @require_http_methods(["DELETE"])
@@ -76,8 +73,7 @@ def api_list_appointment(request):
             appointment = Appointment.create(**content)
         except DataError:
             return JsonResponse(
-                {"message": "Confirm VIN is composed of 17 characters"},
-                status=400
+                {"message": "Confirm VIN is composed of 17 characters"}, status=400
             )
         return JsonResponse(
             appointment,
@@ -135,4 +131,3 @@ def api_appointment_finish(request, pk):
         encoder=AppointmentEncoder,
         safe=False,
     )
-

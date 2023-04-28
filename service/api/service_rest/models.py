@@ -36,7 +36,7 @@ class Appointment(models.Model):
         related_name="appointments",
         on_delete=models.CASCADE,
     )
-    
+
     def __str__(self):
         return f"{self.vin} {self.date_time}"
 

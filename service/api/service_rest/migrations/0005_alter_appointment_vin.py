@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('service_rest', '0004_remove_appointment_is_vip'),
+        ("service_rest", "0004_remove_appointment_is_vip"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='appointment',
-            name='vin',
+            model_name="appointment",
+            name="vin",
             field=models.CharField(max_length=17),
         ),
     ]

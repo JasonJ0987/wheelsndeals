@@ -20,7 +20,9 @@ def api_salespeople(request):
         try:
             salesperson = Salesperson.objects.create(**content)
         except IntegrityError:
-            return JsonResponse({"message": "This employee id already exists"}, status=400)
+            return JsonResponse(
+                {"message": "This employee id already exists"}, status=400
+            )
 
         return JsonResponse(
             salesperson,
@@ -57,13 +59,11 @@ def api_customers(request):
         try:
             customer = Customer.objects.create(**content)
         except IntegrityError:
-            return JsonResponse({"message": "This phone number already exists"}, status=400)
+            return JsonResponse(
+                {"message": "This phone number already exists"}, status=400
+            )
 
-        return JsonResponse(
-            customer,
-            encoder=CustomerEncoder,
-            safe=False
-        )
+        return JsonResponse(customer, encoder=CustomerEncoder, safe=False)
 
 
 @require_http_methods(["DELETE"])
@@ -119,7 +119,8 @@ def api_sales(request, vin=None):
 
         if autoVO.sold == True:
             return JsonResponse(
-                {"message": "This sale has already been completed"}, status=400,
+                {"message": "This sale has already been completed"},
+                status=400,
             )
 
         autoVO.sold = True
