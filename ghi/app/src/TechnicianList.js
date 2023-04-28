@@ -7,8 +7,8 @@ function TechnicianList() {
     const loadTechnicians = async () => {
         const response = await fetch('http://localhost:8080/api/technicians/');
         if (response.ok) {
-          const data = await response.json();
-          setTechnicians(data.technicians);
+            const data = await response.json();
+            setTechnicians(data.technicians);
         }
     };
     useEffect(() => {loadTechnicians();}, []);
