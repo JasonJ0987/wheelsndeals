@@ -23,8 +23,8 @@ import SalespersonHistory from './SalespersonHistory';
 
 function App() {
     return (
-        <BrowserRouter>
-            <Nav />
+    <BrowserRouter>
+        <Nav />
             <Routes>
                 <Route index element={<MainPage />} />
                 <Route path="manufacturers" >
