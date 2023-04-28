@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 function SalespersonForm() {
     const [formData, setFormData] = useState({
         first_name: '',
