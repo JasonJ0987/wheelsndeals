@@ -8,6 +8,7 @@ class AutomobileVO(models.Model):
     def __str__(self):
         return self.vin
 
+
 class Salesperson(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
@@ -25,6 +26,7 @@ class Customer(models.Model):
 
     def __str__(self):
         return f"{self.last_name}, {self.first_name}"
+
 
 class Sale(models.Model):
     automobile = models.ForeignKey(
