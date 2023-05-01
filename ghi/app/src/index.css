@@ -11,3 +11,20 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
 }
+
+
+#navcolor {
+    background: rgb(31,88,65);
+    background: linear-gradient(90deg, rgba(31,88,65,1) 50%, rgba(55,60,61,1) 100%);
+}
+
+
+#background {
+    background: url("green_tire.jpeg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 100vh;
+    margin: 0;
+}
