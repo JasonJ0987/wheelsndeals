@@ -27,3 +27,14 @@ code {
     min-height: 100vh;
     margin: 0;
 }
+
+
+#h1Color {
+    color: #d8d7d2;
+}
+
+
+.textColor {
+    color: #d8d7d2;
+    font-size: xx-large;
+}
