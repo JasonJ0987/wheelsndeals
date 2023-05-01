@@ -14,8 +14,7 @@ code {
 
 
 #navcolor {
-    background: rgb(31,88,65);
-    background: linear-gradient(90deg, rgba(31,88,65,1) 50%, rgba(55,60,61,1) 100%);
+    background: url("sparks.gif");
 }
 
 
