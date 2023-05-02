@@ -53,6 +53,10 @@ ALLOWED_HOSTS = [
     "localhost",
 ]
 
+
+# AUTH_USER_MODEL = "account_rest.Account"
+
+
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
 ]
