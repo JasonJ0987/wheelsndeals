@@ -20,7 +20,7 @@ services:
       - beta-data:/var/lib/postgresql/data
       - ./db:/docker-entrypoint-initdb.d
     environment:
-      - POSTGRES_MULTIPLE_DATABASES=inventory,sales,service
+      - POSTGRES_MULTIPLE_DATABASES=inventory,sales,service,accounts
       - POSTGRES_PASSWORD=test-databases
     ports:
       - 15432:5432
@@ -95,4 +95,18 @@ services:
     environment:
       DATABASE_URL: postgres://sales:password@database:5432/sales
       WAIT_HOSTS: database:5432,sales-api:8000
+      WAIT_TIMEOUT: 240
+  account-api:
+    build:
+      context: ./accounts/api
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "8070:8000"
+    volumes:
+      - ./accounts/api:/app
+    depends_on:
+      - database
+    environment:
+      DATABASE_URL: postgres://accounts:password@database:5432/accounts
+      WAIT_HOSTS: database:5432
       WAIT_TIMEOUT: 240
