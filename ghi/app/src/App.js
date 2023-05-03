@@ -1,8 +1,9 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route  } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
 import ManufacturerList from './ManufacturerList';
 import ManufacturerForm from './ManufacturerForm';
+import ManufacturerEdit from './ManufacturerEdit';
 import AutomobileList from './AutomobileList';
 import AutomobileForm from './AutomobileForm';
 import VehicleModelForm from './VehicleModelForm';
@@ -30,6 +31,7 @@ function App() {
                 <Route path="manufacturers" >
                     <Route index element={<ManufacturerList />} />
                     <Route path="new" element={<ManufacturerForm />} />
+                    <Route path="edit/:id" element={<ManufacturerEdit />} />
                 </Route>
                 <Route path="models" >
                     <Route index element={<VehicleModelsList />} />

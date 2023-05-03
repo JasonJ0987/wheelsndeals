@@ -38,3 +38,17 @@ code {
     color: #d8d7d2;
     font-size: xx-large;
 }
+
+.nav_button {
+    background-color: black;
+    border: 0;
+    font-size: large;
+}
+
+.nav_dropdown {
+    background-color: black;
+}
+
+.nav_title {
+    font-size: xx-large;
+}

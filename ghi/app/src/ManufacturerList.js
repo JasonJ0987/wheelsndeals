@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 
 function ManufacturerList() {
 
@@ -53,10 +55,13 @@ function ManufacturerList() {
                         {(del === manufacturer.id) ? (
                             <div className="d-grid gap-2">
                                 <button onClick={(event) => handleConfirmDelete(event, manufacturer.id)} className="btn btn-outline-danger btn-sm" type="button">Confirm Delete</button>
-                                <button onClick={() => handleCancelDelete()} className="btn btn-outline-danger btn-sm" type="button">Cancel Delete</button>
+                                <button onClick={() => handleCancelDelete()} className="btn btn-outline-danger btn-sm shadow-none" type="button">Cancel Delete</button>
                             </div>
                         ) : (
-                            <button onClick={() => handleDelete(manufacturer.id)} className="btn btn-outline-danger btn-sm">Delete</button>
+                            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <Link to={`/manufacturers/edit/${manufacturer.id}`} className="btn btn-warning btn-sm">Edit</Link>
+                                <button onClick={() => handleDelete(manufacturer.id)} className="btn btn-danger btn-sm shadow-none">Delete</button>
+                            </div>
                         )}
                         </td>
                     </tr>
