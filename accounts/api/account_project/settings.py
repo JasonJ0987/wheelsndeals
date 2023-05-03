@@ -31,6 +31,7 @@ DEBUG = True
 
 INSTALLED_APPS = [
     'account_rest.apps.AccountRestConfig',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,7 +55,7 @@ ALLOWED_HOSTS = [
 ]
 
 
-# AUTH_USER_MODEL = "account_rest.Account"
+# AUTH_USER_MODEL = "account_rest.User"
 
 
 CSRF_TRUSTED_ORIGINS = [
