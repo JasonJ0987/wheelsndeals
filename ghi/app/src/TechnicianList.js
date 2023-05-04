@@ -50,11 +50,13 @@ function TechnicianList() {
                         <td>
                         {(del === technician.id) ? (
                             <div className="d-grid gap-2">
-                                <button onClick={(event) => handleConfirmDelete(event, technician.id)} className="btn btn-outline-danger btn-sm" type="button">Confirm Delete</button>
+                                <button onClick={(event) => handleConfirmDelete(event, technician.id)} className="btn btn-outline-danger btn-sm shadow-none" type="button">Confirm Delete</button>
                                 <button onClick={() => handleCancelDelete()} className="btn btn-outline-danger btn-sm" type="button">Cancel Delete</button>
                             </div>
                         ) : (
-                            <button onClick={() => handleDelete(technician.id)} className="btn btn-outline-danger btn-sm">Delete</button>
+                            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button onClick={() => handleDelete(technician.id)} className="btn btn-danger btn-sm">Delete</button>
+                            </div>
                         )}
                         </td>
                     </tr>

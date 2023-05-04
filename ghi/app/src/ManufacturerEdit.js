@@ -56,11 +56,10 @@ function ManufacturerEdit() {
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
                     <h1>Edit a manufacturer</h1>
-                    <h4 className={formClasses}>Name: {manufacturer.name}</h4>
                     <form onSubmit={handleSubmit} className={formClasses}>
                         <div className="form-floating mb-3">
-                            <input value={name} onChange={handleNameChange} placeholder="Change Manufacturer Name..." required type="text" id="name" name="name" className="form-control" />
-                            <label htmlFor="name">Change Manufacturer Name...</label>
+                            <input value={name} onChange={handleNameChange} placeholder="Manufacturer name..." required type="text" id="name" name="name" className="form-control" />
+                            <label htmlFor="name">Manufacturer name: {manufacturer.name}</label>
                         </div>
                         <button className="btn btn-primary">
                             Edit

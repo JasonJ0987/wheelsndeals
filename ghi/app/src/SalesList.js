@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-function SalesForm() {
+function SalesList() {
     const [sales, setSales] = useState([]);
+    const [del, setDel] = useState(null);
 
     const loadSales = async() => {
         const url = "http://localhost:8090/api/sales/";
@@ -15,6 +16,23 @@ function SalesForm() {
     useEffect(() => {
         loadSales();
     }, []);
+
+    const handleConfirmDelete = async (event, saleId) => {
+        event.preventDefault();
+        const url = `http://localhost:8090/api/sales/${saleId}/`;
+
+        const fetchConfig = {
+            method: "DELETE",
+        };
+
+        const response = await fetch(url, fetchConfig);
+        if (response.ok) {
+            setSales(sales.filter(sale => sale.id !== saleId));
+        }
+    };
+
+    const handleCancelDelete = () => { setDel(null) };
+    const handleDelete = (saleID) => { setDel(saleID) };
 
     return(
         <div className="container">
@@ -47,6 +65,18 @@ function SalesForm() {
                             <td>
                                 ${sale.price}
                             </td>
+                            <td>
+                            {(del === sale.id) ? (
+                                <div className="d-grid gap-2">
+                                    <button onClick={(event) => handleConfirmDelete(event, sale.id)} className="btn btn-outline-danger btn-sm shadow-none" type="button">Confirm Delete</button>
+                                    <button onClick={() => handleCancelDelete()} className="btn btn-outline-danger btn-sm" type="button">Cancel Delete</button>
+                                </div>
+                            ) : (
+                                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button onClick={() => handleDelete(sale.id)} className="btn btn-danger btn-sm">Delete</button>
+                                </div>
+                            )}
+                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -55,4 +85,4 @@ function SalesForm() {
     );
 };
 
-export default SalesForm;
+export default SalesList;

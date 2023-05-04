@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 function AppointmentList() {
     const [appointments, setAppointments] = useState([]);
     const [automobiles, setAutomobiles] = useState([]);
+    const [del, setDel] = useState(null);
 
     const loadAppointments = async () => {
         const response = await fetch('http://localhost:8080/api/appointments/');
@@ -49,6 +50,23 @@ function AppointmentList() {
         }
     };
 
+    const handleConfirmDelete = async (event, appointmentId) => {
+        event.preventDefault();
+        const url = `http://localhost:8080/api/appointments/${appointmentId}`;
+
+        const fetchConfig = {
+            method: "DELETE",
+        };
+
+        const response = await fetch(url, fetchConfig);
+        if (response.ok) {
+            setAppointments(appointments.filter(appointment => appointment.id !== appointmentId));
+        }
+    };
+
+    const handleCancelDelete = () => { setDel(null) };
+    const handleDelete = (appointmentID) => { setDel(appointmentID) };
+
     return (
         <div className='container'>
         <h1 className="mt-4">Service Appointments</h1>
@@ -62,6 +80,7 @@ function AppointmentList() {
                     <th>Time</th>
                     <th>Technician</th>
                     <th>Reason</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -77,8 +96,20 @@ function AppointmentList() {
                         <td>{appointment.technician.first_name} {appointment.technician.last_name}</td>
                         <td>{appointment.reason}</td>
                         <td>
-                            <button onClick={(event) => handleCancel(event, appointment.id)} className="btn btn-outline-danger btn-sm" type="button">Cancel</button>
+                            <button onClick={(event) => handleCancel(event, appointment.id)} className="btn btn-outline-danger btn-sm me-2" type="button">Cancel</button>
                             <button onClick={(event) => handleFinish(event, appointment.id)} className="btn btn-outline-success btn-sm" type="button">Finish</button>
+                        </td>
+                        <td>
+                            {(del === appointment.id) ? (
+                                <div className="d-grid gap-2">
+                                    <button onClick={(event) => handleConfirmDelete(event, appointment.id)} className="btn btn-outline-danger btn-sm shadow-none" type="button">Confirm Delete</button>
+                                    <button onClick={() => handleCancelDelete()} className="btn btn-outline-danger btn-sm" type="button">Cancel Delete</button>
+                                </div>
+                            ) : (
+                                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button onClick={() => handleDelete(appointment.id)} className="btn btn-danger btn-sm">Delete</button>
+                                </div>
+                            )}
                         </td>
                     </tr>
                 ))}

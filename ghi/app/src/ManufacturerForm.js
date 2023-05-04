@@ -10,7 +10,7 @@ function ManufacturerForm() {
         setName(value);
     };
 
-    const handleSubmit = async(event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {};
         data.name=name;

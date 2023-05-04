@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function VehicleModelsList() {
     const [models, setModels] = useState([]);
@@ -50,10 +51,13 @@ function VehicleModelsList() {
                         {(del === model.id) ? (
                             <div className="d-grid gap-2">
                                 <button onClick={(event) => handleConfirmDelete(event, model.id)} className="btn btn-outline-danger btn-sm" type="button">Confirm Delete</button>
-                                <button onClick={() => handleCancelDelete()} className="btn btn-outline-danger btn-sm" type="button">Cancel Delete</button>
+                                <button onClick={() => handleCancelDelete()} className="btn btn-outline-danger btn-sm shadow-none" type="button">Cancel Delete</button>
                             </div>
                         ) : (
-                            <button onClick={() => handleDelete(model.id)} className="btn btn-outline-danger btn-sm">Delete</button>
+                            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <Link to={`/models/edit/${model.id}`} className="btn btn-warning btn-sm flex-fill">Edit</Link>
+                                <button onClick={() => handleDelete(model.id)} className="btn btn-danger btn-sm shadow-none flex-fill">Delete</button>
+                            </div>
                         )}
                         </td>
                     </tr>

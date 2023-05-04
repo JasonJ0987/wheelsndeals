@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 
-function SalespersonForm() {
+function SalesForm() {
     const [formData, setFormData] = useState({
         automobile: '',
         salesperson: '',
@@ -30,7 +30,6 @@ function SalespersonForm() {
             setAuto(data.autos);
         }
     };
-
 
     const fetchEmployees = async () => {
         const employeeUrl = "http://localhost:8090/api/salespeople/";
@@ -179,4 +178,4 @@ function SalespersonForm() {
     );
 };
 
-export default SalespersonForm;
+export default SalesForm;

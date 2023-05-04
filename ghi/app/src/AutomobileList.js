@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function AutomobileList() {
 
@@ -73,10 +74,13 @@ function AutomobileList() {
                         {(del === automobile.vin) ? (
                             <div className="d-grid gap-2">
                                 <button onClick={(event) => handleConfirmDelete(event, automobile.vin)} className="btn btn-outline-danger btn-sm" type="button">Confirm Delete</button>
-                                <button onClick={() => handleCancelDelete()} className="btn btn-outline-danger btn-sm" type="button">Cancel Delete</button>
+                                <button onClick={() => handleCancelDelete()} className="btn btn-outline-danger btn-sm shadow-none" type="button">Cancel Delete</button>
                             </div>
                         ) : (
-                            <button onClick={() => handleDelete(automobile.vin)} className="btn btn-outline-danger btn-sm">Delete</button>
+                            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <Link to={`/automobiles/edit/${automobile.vin}`} className="btn btn-warning btn-sm flex-fill">Edit</Link>
+                                <button onClick={() => handleDelete(automobile.vin)} className="btn btn-danger btn-sm shadow-none flex-fill">Delete</button>
+                            </div>
                         )}
                         </td>
                     </tr>
